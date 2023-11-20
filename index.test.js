@@ -10,13 +10,21 @@ const app = require('./src/app');
 const seedMusician = require("./seedData");
 
 
-describe('./musicians endpoint', () => {
-    // Write your tests here
+describe('/musicians endpoint', () => {
+    it("returns all musicians", async () => {
+        const response = await request(app).get("/musicians")
+        expect(response.body.length).toBe(3)
+    })
+   
+    it("returns 200 status", async () => {
+        const response = await request(app).get("/musicians")
+        expect(response.statusCode).toBe(200)
+    })
     
-    
-
-
-
-
+    it("returns all musicians", async () => {
+        const response = await request(app).get("/musicians")
+        const responseData = JSON.parse(response.text)
+        expect(responseData.length).toBe(3)
+    })
     
 })
