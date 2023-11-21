@@ -5,7 +5,7 @@ const { db } = require("../db/connection")
 
 const port = 3000;
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({extended: true}))
 
 app.get('/musicians',async(req, res) => {
  const data = await Musician.findAll();
