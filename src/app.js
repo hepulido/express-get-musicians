@@ -17,6 +17,25 @@ app.get('/musicians/:id', async(req, res) => {
     res.json(data);
 })
 
+app.post('/musicians', async(req,res) =>{
+    let data = await Musician.create(req.body);
+    res.json(data);
+})
+
+app.put('/musicians/:id', async(req,res) =>{
+    let data = await Musician.findByPk(req.params.id);
+    data.name = req.body.name;
+    data.instrument = req.body.instrument;
+    await data.save();
+    res.json(data)
+})
+
+app.delete('/musicians/:id', async(req,res) =>{
+    let data = await Musician.findByPk(req.params.id);
+    await data.destroy();
+    res.send(res.statusCode);
+})
+
 
 
 app.get('/bands', async (req,res) => {
