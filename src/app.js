@@ -24,9 +24,7 @@ app.post('/musicians', async(req,res) =>{
 
 app.put('/musicians/:id', async(req,res) =>{
     let data = await Musician.findByPk(req.params.id);
-    data.name = req.body.name;
-    data.instrument = req.body.instrument;
-    await data.save();
+    await data.update(req.body)
     res.json(data)
 })
 

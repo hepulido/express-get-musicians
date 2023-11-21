@@ -26,7 +26,25 @@ describe('/musicians endpoint', () => {
         const responseData = JSON.parse(response.text)
         expect(responseData.length).toBe(3)
     })
+    it("Check post request, returns a new musician", async() =>{
+     const responseData = await request(app).post("/musicians").send({name: "badbunny", instrument: "micro"}).set('Accept', 'application/json')
+     expect(responseData.body.name).toBe("badbunny");
+    })
+
+    it ("returns 200 status", async () =>{
+        const response = await request(app).get("/musicians/:id")
+        expect(response.statusCode).toBe(200)
+    })
     
+    it ("checks put resquets", async () =>{
+        const responseData = await request(app).put("/musicians/4").send({name: "bad bunny"}).set('Accept', 'application/json')
+        expect(responseData.body.name).toBe("bad bunny")
+    })
+     
+    it("checks delete request",async () =>{
+        const responseData = await request(app).del("/musicians/4")
+        expect(responseData.statusCode).toBe(200)
+    })
 })
 describe('/Bands endpoint', () => {
     it("returns all bands", async () => {
