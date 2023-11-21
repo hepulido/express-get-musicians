@@ -46,3 +46,10 @@ describe('/Bands endpoint', () => {
     })
     
 })
+
+describe("test id params", () => {
+    it("returns param musician", async () => {
+        const response = await request(app).get("/musicians/1")
+        expect(response.body.name).toBe("Mick Jagger")
+    })
+})
